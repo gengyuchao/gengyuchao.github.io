@@ -1,5 +1,5 @@
 body {
-  background: url("https://cdn.jsdelivr.net/gh/gengyuchao/gengyuchao.github.io@master/img/background.png");
+  background: url("/img/background.png");
 }
 .night .navbar,
 .night footer.footer,

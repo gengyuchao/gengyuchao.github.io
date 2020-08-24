@@ -1,5 +1,9 @@
 body {
   background: url("/img/background.png");
+  background_night: url("/img/background_black.png");
+}
+.night {
+  background: url("/img/background_black.png");
 }
 .night .navbar,
 .night footer.footer,

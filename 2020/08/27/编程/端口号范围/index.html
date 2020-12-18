@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="generator" content="Hexo 4.2.1"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><meta name="keywords" content="[object Object]"><meta name="description" content="端口号范围 和 入侵电脑端口查询原文转自 http://blog.sina.com.cn/s/blog_4bdf819f0100vryh.html
+端口使用一个16位的数字表示，它的范围是 0~65535，0到1023之间的端口号保留给预定义的服务。例如：http使用 80 端口。我们在编写网络应用程序时，要为程序指定 1024～ 65535 之间的端口号。
+端口概念在网络技术中，端口（Port）大致有两种意思：一是物理意义上的端口，比如，ADSL Modem、集线器、交换机、路由器用于连接其他网络设备的接口，如RJ-45端口、SC端口等等。二是逻辑意义上的端口，一般是指TCP/IP协议中的端口，端口号的范围从0到65535，比如用于浏览网页服务的80端口，用于FTP服务的21端口等等。我们这里将要介绍的就是逻辑意义上的端口。
+（1）知名端口（Well-Known Ports）知名端口即众所周知的端口号，范围从0到1023，这些端口号一般固定分配给一些服务。比如21端口分配给FTP服务，25端口分配给SMTP（简单邮件传输协议）服务，80端口分配给HTTP服务，135端口分配给RPC（远程过程调用）服务等等。
+（2）动态端口（Dynamic Ports）动态端口的范围从1024到65535，这些端口号一般不固定分配给某个服务，也就是说许多服务都可以使用这些端口。只要运行的程序向系统提出访问网络的申请，那么系统就可以从这些端口号中分配一个供该程序使用。比如1024端口就是分配给第一个向系统发出申请的程序。在关闭程序进程后，就会释放所占用的端口号。"><meta name="author" content="gengyuchao"><title>端口号范围（转） - 神迹の降临</title><meta description="端口号范围 和 入侵电脑端口查询原文转自 http:&amp;#x2F;&amp;#x2F;blog.sina.com.cn&amp;#x2F;s&amp;#x2F;blog_4bdf819f0100vryh.html 端口使用一个16位的数字表示，它的范围是 0~65535，0到1023之间的端口号保留给预定义的服务。例如：http使用 80 端口。我们在编写网络应用程序时，要为程序指定 1024～ 65535 之间的端口号。 端口概念在网络技术中，端口（Port）"><meta property="og:type" content="article"><meta property="og:title" content="端口号范围（转）"><meta property="og:url" content="https://github.com/gengyuchao/gengyuchao.github.io/2020/08/27/%E7%BC%96%E7%A8%8B/%E7%AB%AF%E5%8F%A3%E5%8F%B7%E8%8C%83%E5%9B%B4/"><meta property="og:site_name" content="神迹の降临"><meta property="og:description" content="端口号范围 和 入侵电脑端口查询原文转自 http:&amp;#x2F;&amp;#x2F;blog.sina.com.cn&amp;#x2F;s&amp;#x2F;blog_4bdf819f0100vryh.html 端口使用一个16位的数字表示，它的范围是 0~65535，0到1023之间的端口号保留给预定义的服务。例如：http使用 80 端口。我们在编写网络应用程序时，要为程序指定 1024～ 65535 之间的端口号。 端口概念在网络技术中，端口（Port）"><meta property="og:locale" content="en_US"><meta property="article:published_time" content="2020-08-27T06:52:35.573Z"><meta property="article:modified_time" content="2020-08-27T06:54:59.320Z"><meta property="article:author" content="gengyuchao"><meta property="article:tag" content="编程"><meta property="article:tag" content="TCP"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://github.com/img/avatar.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://github.com/gengyuchao/gengyuchao.github.io/2020/08/27/%E7%BC%96%E7%A8%8B/%E7%AB%AF%E5%8F%A3%E5%8F%B7%E8%8C%83%E5%9B%B4/"},"headline":"端口号范围（转）","image":["https://github.com/img/avatar.png"],"datePublished":"2020-08-27T06:52:35.573Z","dateModified":"2020-08-27T06:54:59.320Z","author":{"@type":"Person","name":"gengyuchao"},"description":"端口号范围 和 入侵电脑端口查询原文转自 http:&#x2F;&#x2F;blog.sina.com.cn&#x2F;s&#x2F;blog_4bdf819f0100vryh.html 端口使用一个16位的数字表示，它的范围是 0~65535，0到1023之间的端口号保留给预定义的服务。例如：http使用 80 端口。我们在编写网络应用程序时，要为程序指定 1024～ 65535 之间的端口号。 端口概念在网络技术中，端口（Port）"}</script><link rel="alternative" href="/atom.xml" title="神迹の降临" type="application/atom+xml"><link rel="icon" href="/img/favicon.png"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css?family=Ubuntu:400,600|Source+Code+Pro|Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Microsoft YaHei:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&amp;amp;subset=latin,latin-ext|Inconsolata|Itim|Lobster.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.12/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/gengyuchao/gengyuchao.github.io@master/css/style.min.css"><link rel="stylesheet" href="/css/e-style.css"><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/gh/gengyuchao/gengyuchao.github.io@master/js/globalUtils.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/gengyuchao/gengyuchao.github.io@master/live2d/waifu.min.css"><script type="text/javascript" async src="https://cdn.jsdelivr.net/gh/gengyuchao/gengyuchao.github.io@master/live2d/autoload.min.js"></script></head><body class="is-3-column has-navbar-fixed-top"><nav class="navbar navbar-main is-fixed-top"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="https://cdn.jsdelivr.net/gh/gengyuchao/gengyuchao.github.io@master/img/logo.png" alt="神迹の降临" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/media">影音</a><a class="navbar-item" href="/album">相册</a><a class="navbar-item" href="/friend">友链</a><a class="navbar-item" href="/self-talking">碎碎念</a><a class="navbar-item" href="/message">留言</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/gengyuchao"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a></div></div></div></nav><script type="text/javascript" src="https://cdn.jsdelivr.net/gh/gengyuchao/gengyuchao.github.io@master/js/theme-setting.min.js"></script><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><i class="far fa-calendar-plus"> </i>2020-08-27  <a class="commentCountImg" href="/2020/08/27/%E7%BC%96%E7%A8%8B/%E7%AB%AF%E5%8F%A3%E5%8F%B7%E8%8C%83%E5%9B%B4/#comment-container"><span class="display-none-class">741e5059137615ae157e0980bc3581e1</span><i class="far fa-comment-dots"></i> <span class="commentCount" id="741e5059137615ae157e0980bc3581e1">99+</span>  </a><span class="level-item"><i class="far fa-clock"> </i>an hour  <i class="fas fa-pencil-alt"> </i>9.7 k</span><span class="level-item" id="busuanzi_container_page_pv"><i class="far fa-eye"></i>&nbsp;&nbsp;<span id="busuanzi_value_page_pv">0</span> visits</span></div></div><h1 class="title is-3 is-size-4-mobile">端口号范围（转）</h1><div class="content"><h1 id="端口号范围-和-入侵电脑端口查询"><a href="#端口号范围-和-入侵电脑端口查询" class="headerlink" title="端口号范围 和 入侵电脑端口查询"></a>端口号范围 和 入侵电脑端口查询</h1><p>原文转自 <a href="http://blog.sina.com.cn/s/blog_4bdf819f0100vryh.html">http://blog.sina.com.cn/s/blog_4bdf819f0100vryh.html</a></p>
+<p>端口使用一个16位的数字表示，它的范围是 0~65535，0到1023之间的端口号保留给预定义的服务。例如：http使用 80 端口。我们在编写网络应用程序时，要为程序指定 1024～ 65535 之间的端口号。</p>
+<h2 id="端口概念"><a href="#端口概念" class="headerlink" title="端口概念"></a>端口概念</h2><p>在网络技术中，端口（Port）大致有两种意思：一是物理意义上的端口，比如，ADSL Modem、集线器、交换机、路由器用于连接其他网络设备的接口，如RJ-45端口、SC端口等等。二是逻辑意义上的端口，一般是指TCP/IP协议中的端口，端口号的范围从0到65535，比如用于浏览网页服务的80端口，用于FTP服务的21端口等等。我们这里将要介绍的就是逻辑意义上的端口。</p>
+<h3 id="（1）知名端口（Well-Known-Ports）"><a href="#（1）知名端口（Well-Known-Ports）" class="headerlink" title="（1）知名端口（Well-Known Ports）"></a>（1）知名端口（Well-Known Ports）</h3><p>知名端口即众所周知的端口号，范围从0到1023，这些端口号一般固定分配给一些服务。比如21端口分配给FTP服务，25端口分配给SMTP（简单邮件传输协议）服务，80端口分配给HTTP服务，135端口分配给RPC（远程过程调用）服务等等。</p>
+<h3 id="（2）动态端口（Dynamic-Ports）"><a href="#（2）动态端口（Dynamic-Ports）" class="headerlink" title="（2）动态端口（Dynamic Ports）"></a>（2）动态端口（Dynamic Ports）</h3><p>动态端口的范围从1024到65535，这些端口号一般不固定分配给某个服务，也就是说许多服务都可以使用这些端口。只要运行的程序向系统提出访问网络的申请，那么系统就可以从这些端口号中分配一个供该程序使用。比如1024端口就是分配给第一个向系统发出申请的程序。在关闭程序进程后，就会释放所占用的端口号。</p>
+<a id="more"></a>
+
+
+
+<h2 id="入侵电脑端口查询"><a href="#入侵电脑端口查询" class="headerlink" title="入侵电脑端口查询"></a>入侵电脑端口查询</h2><p>端口：0</p>
+<p>服务：Reserved</p>
+<p>说明：通常用于分析操作系统。这一方法能够工作是因为在一些系统中“0”是无效端口，当你试图使用通常的闭合端口连接它时将产生不同的结果。一种典型的扫描，使用IP地址为0.0.0.0，设置ACK位并在以太网层广播。</p>
+<p>端口：1</p>
+<p>服务：tcpmux</p>
+<p>说明：这显示有人在寻找SGI Irix机器。Irix是实现tcpmux的主要提供者，默认情况下tcpmux在这种系统中被打开。Irix机器在发布是含有几个默认的无密码的帐户，如：IP、GUEST UUCP、NUUCP、DEMOS 、TUTOR、DIAG、OUTOFBOX等。许多管理员在安装后忘记删除这些帐户。因此HACKER在INTERNET上搜索tcpmux并利用这些帐户。</p>
+<p>端口：7</p>
+<p>服务：Echo</p>
+<p>说明：能看到许多人搜索Fraggle放大器时，发送到X.X.X.0和X.X.X.255的信息。</p>
+<p>端口：19</p>
+<p>服务：Character Generator</p>
+<p>说明：这是一种仅仅发送字符的服务。UDP版本将会在收到UDP包后回应含有垃圾字符的包。TCP连接时会发送含有垃圾字符的数据流直到连接关闭。HACKER利用IP欺骗可以发动DoS攻击。伪造两个chargen服务器之间的UDP包。同样Fraggle DoS攻击向目标地址的这个端口广播一个带有伪造受害者IP的数据包，受害者为了回应这些数据而过载。</p>
+<p>端口：21</p>
+<p>服务：FTP</p>
+<p>说明：FTP服务器所开放的端口，用于上传、下载。最常见的攻击者用于寻找打开anonymous的FTP服务器的方法。这些服务器带有可读写的目录。木马Doly Trojan、Fore、Invisible FTP、WebEx、WinCrash和Blade Runner所开放的端口。</p>
+<p>端口：22</p>
+<p>服务：Ssh</p>
+<p>说明：PcAnywhere建立的TCP和这一端口的连接可能是为了寻找ssh。这一服务有许多弱点，如果配置成特定的模式，许多使用RSAREF库的版本就会有不少的漏洞存在。</p>
+<p>端口：23</p>
+<p>服务：Telnet</p>
+<p>说明：远程登录，入侵者在搜索远程登录UNIX的服务。大多数情况下扫描这一端口是为了找到机器运行的操作系统。还有使用其他技术，入侵者也会找到密码。木马Tiny Telnet Server就开放这个端口。</p>
+<p>端口：25</p>
+<p>服务：SMTP</p>
+<p>说明：SMTP服务器所开放的端口，用于发送邮件。入侵者寻找SMTP服务器是为了传递他们的SPAM。入侵者的帐户被关闭，他们需要连接到高带宽的E-MAIL服务器上，将简单的信息传递到不同的地址。木马Antigen、Email Password Sender、Haebu Coceda、Shtrilitz Stealth、WinPC、WinSpy都开放这个端口。</p>
+<p>端口：31</p>
+<p>服务：MSG Authentication</p>
+<p>说明：木马Master Paradise、Hackers Paradise开放此端口。</p>
+<p>端口：42</p>
+<p>服务：WINS Replication</p>
+<p>说明：WINS复制</p>
+<p>端口：53</p>
+<p>服务：Domain Name Server（DNS）</p>
+<p>说明：DNS服务器所开放的端口，入侵者可能是试图进行区域传递（TCP），欺骗DNS（UDP）或隐藏其他的通信。因此防火墙常常过滤或记录此端口。</p>
+<p>端口：67</p>
+<p>服务：Bootstrap Protocol Server</p>
+<p>说明：通过DSL和Cable modem的防火墙常会看见大量发送到广播地址255.255.255.255的数据。这些机器在向DHCP服务器请求一个地址。HACKER常进入它们，分配一个地址把自己作为局部路由器而发起大量中间人（man-in-middle）攻击。客户端向68端口广播请求配置，服务器向67端口广播回应请求。这种回应使用广播是因为客户端还不知道可以发送的IP地址。</p>
+<p>端口：69</p>
+<p>服务：Trival File Transfer</p>
+<p>说明：许多服务器与bootp一起提供这项服务，便于从系统下载启动代码。但是它们常常由于错误配置而使入侵者能从系统中窃取任何 文件。它们也可用于系统写入文件。</p>
+<p>端口：79</p>
+<p>服务：Finger Server</p>
+<p>说明：入侵者用于获得用户信息，查询操作系统，探测已知的缓冲区溢出错误，回应从自己机器到其他机器Finger扫描。</p>
+<p>端口：80</p>
+<p>服务：HTTP</p>
+<p>说明：用于网页浏览。木马Executor开放此端口。</p>
+<p>端口：99</p>
+<p>服务：Metagram Relay</p>
+<p>说明：后门程序ncx99开放此端口。</p>
+<p>端口：102</p>
+<p>服务：Message transfer agent(MTA)-X.400 over TCP/IP</p>
+<p>说明：消息传输代理。</p>
+<p>端口：109</p>
+<p>服务：Post Office Protocol -Version3</p>
+<p>说明：POP3服务器开放此端口，用于接收邮件，客户端访问服务器端的邮件服务。POP3服务有许多公认的弱点。关于用户名和密码交 换缓冲区溢出的弱点至少有20个，这意味着入侵者可以在真正登陆前进入系统。成功登陆后还有其他缓冲区溢出错误。</p>
+<p>端口：110</p>
+<p>服务：SUN公司的RPC服务所有端口</p>
+<p>说明：常见RPC服务有rpc.mountd、NFS、rpc.statd、rpc.csmd、rpc.ttybd、amd等</p>
+<p>端口：113</p>
+<p>服务：Authentication Service</p>
+<p>说明：这是一个许多计算机上运行的协议，用于鉴别TCP连接的用户。使用标准的这种服务可以获得许多计算机的信息。但是它可作为许多服务的记录器，尤其是FTP、POP、IMAP、SMTP和IRC等服务。通常如果有许多客户通过防火墙访问这些服务，将会看到许多这个端口的连接请求。记住，如果阻断这个端口客户端会感觉到在防火墙另一边与E-MAIL服务器的缓慢连接。许多防火墙支持TCP连接的阻断过程中发回RST。这将会停止缓慢的连接。</p>
+<p>端口：119</p>
+<p>服务：Network News Transfer Protocol</p>
+<p>说明：NEWS新闻组传输协议，承载USENET通信。这个端口的连接通常是人们在寻找USENET服务器。多数ISP限制，只有他们的客户才能访问他们的新闻组服务器。打开新闻组服务器将允许发/读任何人的帖子，访问被限制的新闻组服务器，匿名发帖或发送SPAM。</p>
+<p>端口：135</p>
+<p>服务：Location Service</p>
+<p>说明：Microsoft在这个端口运行DCE RPC end-point mapper为它的DCOM服务。这与UNIX 111端口的功能很相似。使用DCOM和RPC的服务利用计算机上的end-point mapper注册它们的位置。远端客户连接到计算机时，它们查找end-point mapper找到服务的位置。HACKER扫描计算机的这个端口是为了找到这个计算机上运行Exchange Server吗？什么版本？还有些DOS攻击直接针对这个端口。</p>
+<p>端口：137、138、139</p>
+<p>服务：NETBIOS Name Service</p>
+<p>说明：其中137、138是UDP端口，当通过网上邻居传输文件时用这个端口。而139端口：通过这个端口进入的连接试图获得NetBIOS/SMB服务。这个协议被用于windows文件和打印机共享和SAMBA。还有WINS Regisrtation也用它。</p>
+<p>端口：143</p>
+<p>服务：Interim Mail Access Protocol v2</p>
+<p>说明：和POP3的安全问题一样，许多IMAP服务器存在有缓冲区溢出漏洞。记住：一种LINUX蠕虫（admv0rm）会通过这个端口繁殖，因此许多这个端口的扫描来自不知情的已经被感染的用户。当REDHAT在他们的LINUX发布版本中默认允许IMAP后，这些漏洞变的很流行。这一端口还被用于IMAP2，但并不流行。</p>
+<p>端口：161</p>
+<p>服务：SNMP</p>
+<p>说明：SNMP允许远程管理设备。所有配置和运行信息的储存在数据库中，通过SNMP可获得这些信息。许多管理员的错误配置将被暴露在Internet。Cackers将试图使用默认的密码public、private访问系统。他们可能会试验所有可能的组合。SNMP包可能会被错误的指向用户的网络。</p>
+<p>端口：177</p>
+<p>服务：X Display Manager Control Protocol</p>
+<p>说明：许多入侵者通过它访问X-windows操作台，它同时需要打开6000端口。</p>
+<p>端口：389</p>
+<p>服务：LDAP、ILS</p>
+<p>说明：轻型目录访问协议和NetMeeting Internet Locator Server共用这一端口。</p>
+<p>端口：443</p>
+<p>服务：Https</p>
+<p>说明：网页浏览端口，能提供加密和通过安全端口传输的另一种HTTP。</p>
+<p>端口：456</p>
+<p>服务：[NULL]</p>
+<p>说明：木马HACKERS PARADISE开放此端口。</p>
+<p>端口：513</p>
+<p>服务：Login,remote login</p>
+<p>说明：是从使用cable modem或DSL登陆到子网中的UNIX计算机发出的广播。这些人为入侵者进入他们的系统提供了信息。</p>
+<p>端口：544</p>
+<p>服务：[NULL]</p>
+<p>说明：kerberos kshell</p>
+<p>端口：548</p>
+<p>服务：Macintosh,File Services(AFP/IP)</p>
+<p>说明：Macintosh,文件服务。</p>
+<p>端口：553</p>
+<p>服务：CORBA IIOP （UDP）</p>
+<p>说明：使用cable modem、DSL或VLAN将会看到这个端口的广播。CORBA是一种面向对象的RPC系统。入侵者可以利用这些信息进入系统。</p>
+<p>端口：555</p>
+<p>服务：DSF</p>
+<p>说明：木马PhAse1.0、Stealth Spy、IniKiller开放此端口。</p>
+<p>端口：568</p>
+<p>服务：Membership DPA</p>
+<p>说明：成员资格 DPA。</p>
+<p>端口：569</p>
+<p>服务：Membership MSN</p>
+<p>说明：成员资格 MSN。</p>
+<p>端口：635</p>
+<p>服务：mountd</p>
+<p>说明：Linux的mountd Bug。这是扫描的一个流行BUG。大多数对这个端口的扫描是基于UDP的，但是基于TCP的mountd有所增加（mountd同时运行于两个端口）。记住mountd可运行于任何端口（到底是哪个端口，需要在端口111做portmap查询），只是Linux默认端口是635，就像NFS通常运行于2049端口。</p>
+<p>端口：636</p>
+<p>服务：LDAP</p>
+<p>说明：SSL（Secure Sockets layer）</p>
+<p>端口：666</p>
+<p>服务：Doom Id Software</p>
+<p>说明：木马Attack FTP、Satanz Backdoor开放此端口</p>
+<p>端口：993</p>
+<p>服务：IMAP</p>
+<p>说明：SSL（Secure Sockets layer）</p>
+<p>端口：1001、1011</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Silencer、WebEx开放1001端口。木马Doly Trojan开放1011端口。</p>
+<p>端口：1024</p>
+<p>服务：Reserved</p>
+<p>说明：它是动态端口的开始，许多程序并不在乎用哪个端口连接网络，它们请求系统为它们分配下一个闲置端口。基于这一点分配从端口1024开始。这就是说第一个向系统发出请求的会分配到1024端口。你可以重启机器，打开Telnet，再打开一个窗口运行natstat -a 将会看到Telnet被分配1024端口。还有SQL session也用此端口和5000端口。</p>
+<p>端口：1025、1033</p>
+<p>服务：1025：network blackjack 1033：[NULL]</p>
+<p>说明：木马netspy开放这2个端口。</p>
+<p>端口：1080</p>
+<p>服务：SOCKS</p>
+<p>说明：这一协议以通道方式穿过防火墙，允许防火墙后面的人通过一个IP地址访问INTERNET。理论上它应该只允许内部的通信向外到达INTERNET。但是由于错误的配置，它会允许位于防火墙外部的攻击穿过防火墙。WinGate常会发生这种错误，在加入IRC聊天室时常会看到这种情况。</p>
+<p>端口：1170</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Streaming Audio Trojan、Psyber Stream Server、Voice开放此端口。</p>
+<p>端口：1234、1243、6711、6776</p>
+<p>服务：[NULL]</p>
+<p>说明：木马SubSeven2.0、Ultors Trojan开放1234、6776端口。木马SubSeven1.0/1.9开放1243、6711、6776端口。</p>
+<p>端口：1245</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Vodoo开放此端口。</p>
+<p>端口：1433</p>
+<p>服务：SQL</p>
+<p>说明：Microsoft的SQL服务开放的端口。</p>
+<p>端口：1492</p>
+<p>服务：stone-design-1</p>
+<p>说明：木马FTP99CMP开放此端口。</p>
+<p>端口：1500</p>
+<p>服务：RPC client fixed port session queries</p>
+<p>说明：RPC客户固定端口会话查询</p>
+<p>端口：1503</p>
+<p>服务：NetMeeting T.120</p>
+<p>说明：NetMeeting T.120</p>
+<p>端口：1524</p>
+<p>服务：ingress</p>
+<p>说明：许多攻击脚本将安装一个后门SHELL于这个端口，尤其是针对SUN系统中Sendmail和RPC服务漏洞的脚本。如果刚安装了防火墙就看到在这个端口上的连接企图，很可能是上述原因。可以试试Telnet到用户的计算机上的这个端口，看看它是否会给你一个SHELL。连接到600/pcserver也存在这个问题。</p>
+<p>端口：1600</p>
+<p>服务：issd</p>
+<p>说明：木马Shivka-Burka开放此端口。</p>
+<p>端口：1720</p>
+<p>服务：NetMeeting</p>
+<p>说明：NetMeeting H.233 call Setup。</p>
+<p>端口：1731</p>
+<p>服务：NetMeeting Audio Call Control</p>
+<p>说明：NetMeeting音频调用控制。</p>
+<p>端口：1807</p>
+<p>服务：[NULL]</p>
+<p>说明：木马SpySender开放此端口。</p>
+<p>端口：1981</p>
+<p>服务：[NULL]</p>
+<p>说明：木马ShockRave开放此端口。</p>
+<p>端口：1999</p>
+<p>服务：cisco identification port</p>
+<p>说明：木马BackDoor开放此端口。</p>
+<p>端口：2000</p>
+<p>服务：[NULL]</p>
+<p>说明：木马GirlFriend 1.3、Millenium 1.0开放此端口。</p>
+<p>端口：2001</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Millenium 1.0、Trojan Cow开放此端口。</p>
+<p>端口：2023</p>
+<p>服务：xinuexpansion 4</p>
+<p>说明：木马Pass Ripper开放此端口。</p>
+<p>端口：2049</p>
+<p>服务：NFS</p>
+<p>说明：NFS程序常运行于这个端口。通常需要访问Portmapper查询这个服务运行于哪个端口。</p>
+<p>端口：2115</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Bugs开放此端口。</p>
+<p>端口：2140、3150</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Deep Throat 1.0/3.0开放此端口。</p>
+<p>端口：2500</p>
+<p>服务：RPC client using a fixed port session replication</p>
+<p>说明：应用固定端口会话复制的RPC客户</p>
+<p>端口：2583</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Wincrash 2.0开放此端口。</p>
+<p>端口：2801</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Phineas Phucker开放此端口。</p>
+<p>端口：3024、4092</p>
+<p>服务：[NULL]</p>
+<p>说明：木马WinCrash开放此端口。</p>
+<p>端口：3128</p>
+<p>服务：squid</p>
+<p>说明：这是squid HTTP代理服务器的默认端口。攻击者扫描这个端口是为了搜寻一个代理服务器而匿名访问Internet。也会看到搜索其他代理服务器的端口8000、8001、8080、8888。扫描这个端口的另一个原因是用户正在进入聊天室。其他用户也会检验这个端口以确定用户的机器是否支持代理。</p>
+<p>端口：3129</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Master Paradise开放此端口。</p>
+<p>端口：3150</p>
+<p>服务：[NULL]</p>
+<p>说明：木马The Invasor开放此端口。</p>
+<p>端口：3210、4321</p>
+<p>服务：[NULL]</p>
+<p>说明：木马SchoolBus开放此端口</p>
+<p>端口：3333</p>
+<p>服务：dec-notes</p>
+<p>说明：木马Prosiak开放此端口</p>
+<p>端口：3389</p>
+<p>服务：超级终端</p>
+<p>说明：WINDOWS 2000终端开放此端口。</p>
+<p>端口：3700</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Portal of Doom开放此端口</p>
+<p>端口：3996、4060</p>
+<p>服务：[NULL]</p>
+<p>说明：木马RemoteAnything开放此端口</p>
+<p>端口：4000</p>
+<p>服务：QQ客户端</p>
+<p>说明：腾讯QQ客户端开放此端口。</p>
+<p>端口：4092</p>
+<p>服务：[NULL]</p>
+<p>说明：木马WinCrash开放此端口。</p>
+<p>端口：4590</p>
+<p>服务：[NULL]</p>
+<p>说明：木马ICQTrojan开放此端口。</p>
+<p>端口：5000、5001、5321、50505</p>
+<p>服务：[NULL]</p>
+<p>说明：木马blazer5开放5000端口。木马Sockets de Troie开放5000、5001、5321、50505端口。</p>
+<p>端口：5400、5401、5402</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Blade Runner开放此端口。</p>
+<p>端口：5550</p>
+<p>服务：[NULL]</p>
+<p>说明：木马xtcp开放此端口。</p>
+<p>端口：5569</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Robo-Hack开放此端口。</p>
+<p>端口：5632</p>
+<p>服务：pcAnywere</p>
+<p>说明：有时会看到很多这个端口的扫描，这依赖于用户所在的位置。当用户打开pcAnywere时，它会自动扫描局域网C类网以寻找可能的代理（这里的代理是指agent而不是proxy）。入侵者也会寻找开放这种服务的计算机。，所以应该查看这种扫描的源地址。一些搜寻pcAnywere的扫描包常含端口22的UDP数据包。</p>
+<p>端口：5742</p>
+<p>服务：[NULL]</p>
+<p>说明：木马WinCrash1.03开放此端口。</p>
+<p>端口：6267</p>
+<p>服务：[NULL]</p>
+<p>说明：木马广外女生开放此端口。</p>
+<p>端口：6400</p>
+<p>服务：[NULL]</p>
+<p>说明：木马The tHing开放此端口。</p>
+<p>端口：6670、6671</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Deep Throat开放6670端口。而Deep Throat 3.0开放6671端口。</p>
+<p>端口：6883</p>
+<p>服务：[NULL]</p>
+<p>说明：木马DeltaSource开放此端口。</p>
+<p>端口：6969</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Gatecrasher、Priority开放此端口。</p>
+<p>端口：6970</p>
+<p>服务：RealAudio</p>
+<p>说明：RealAudio客户将从服务器的6970-7170的UDP端口接收音频数据流。这是由TCP-7070端口外向控制连接设置的。</p>
+<p>端口：7000</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Remote Grab开放此端口。</p>
+<p>端口：7300、7301、7306、7307、7308</p>
+<p>服务：[NULL]</p>
+<p>说明：木马NetMonitor开放此端口。另外NetSpy1.0也开放7306端口。</p>
+<p>端口：7323</p>
+<p>服务：[NULL]</p>
+<p>说明：Sygate服务器端。</p>
+<p>端口：7626</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Giscier开放此端口。</p>
+<p>端口：7789</p>
+<p>服务：[NULL]</p>
+<p>说明：木马ICKiller开放此端口。</p>
+<p>端口：8000</p>
+<p>服务：OICQ</p>
+<p>说明：腾讯QQ服务器端开放此端口。</p>
+<p>端口：8010</p>
+<p>服务：Wingate</p>
+<p>说明：Wingate代理开放此端口。</p>
+<p>端口：8080</p>
+<p>服务：代理端口</p>
+<p>说明：WWW代理开放此端口。</p>
+<p>端口：9400、9401、9402</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Incommand 1.0开放此端口。</p>
+<p>端口：9872、9873、9874、9875、10067、10167</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Portal of Doom开放此端口。</p>
+<p>端口：9989</p>
+<p>服务：[NULL]</p>
+<p>说明：木马iNi-Killer开放此端口。</p>
+<p>端口：11000</p>
+<p>服务：[NULL]</p>
+<p>说明：木马SennaSpy开放此端口。</p>
+<p>端口：11223</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Progenic trojan开放此端口。</p>
+<p>端口：12076、61466</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Telecommando开放此端口。</p>
+<p>page]</p>
+<p>端口：12223</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Hack’99 KeyLogger开放此端口。</p>
+<p>端口：12345、12346</p>
+<p>服务：[NULL]</p>
+<p>说明：木马NetBus1.60/1.70、GabanBus开放此端口。</p>
+<p>端口：12361</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Whack-a-mole开放此端口。</p>
+<p>端口：13223</p>
+<p>服务：PowWow</p>
+<p>说明：PowWow是Tribal Voice的聊天程序。它允许用户在此端口打开私人聊天的连接。这一程序对于建立连接非常具有攻击性。它会驻扎在这个TCP端口等回应。造成类似心跳间隔的连接请求。如果一个拨号用户从另一个聊天者手中继承了IP地址就会发生好象有很多不同的人在测试这个端口的情况。这一协议使用OPNG作为其连接请求的前4个字节。</p>
+<p>端口：16969</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Priority开放此端口。</p>
+<p>端口：17027</p>
+<p>服务：Conducent</p>
+<p>说明：这是一个外向连接。这是由于公司内部有人安装了带有Conducent”adbot”的共享软件。Conducent”adbot”是为共享软件显示广告服务的。使用这种服务的一种流行的软件是Pkware。</p>
+<p>端口：19191</p>
+<p>服务：[NULL]</p>
+<p>说明：木马蓝色火焰开放此端口。</p>
+<p>端口：20000、20001</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Millennium开放此端口。</p>
+<p>端口：20034</p>
+<p>服务：[NULL]</p>
+<p>说明：木马NetBus Pro开放此端口。</p>
+<p>端口：21554</p>
+<p>服务：[NULL]</p>
+<p>说明：木马GirlFriend开放此端口。</p>
+<p>端口：22222</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Prosiak开放此端口。</p>
+<p>端口：23456</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Evil FTP、Ugly FTP开放此端口。</p>
+<p>端口：26274、47262</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Delta开放此端口。</p>
+<p>端口：27374</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Subseven 2.1开放此端口。</p>
+<p>端口：30100</p>
+<p>服务：[NULL]</p>
+<p>说明：木马NetSphere开放此端口。</p>
+<p>端口：30303</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Socket23开放此端口。</p>
+<p>端口：30999</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Kuang开放此端口。</p>
+<p>端口：31337、31338</p>
+<p>服务：[NULL]</p>
+<p>说明：木马BO(Back Orifice)开放此端口。另外木马DeepBO也开放31338端口。</p>
+<p>端口：31339</p>
+<p>服务：[NULL]</p>
+<p>说明：木马NetSpy DK开放此端口。</p>
+<p>端口：31666</p>
+<p>服务：[NULL]</p>
+<p>说明：木马BOWhack开放此端口。</p>
+<p>端口：33333</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Prosiak开放此端口。</p>
+<p>端口：34324</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Tiny Telnet Server、BigGluck、TN开放此端口。</p>
+<p>端口：40412</p>
+<p>服务：[NULL]</p>
+<p>说明：木马The Spy开放此端口。</p>
+<p>端口：40421、40422、40423、40426、</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Masters Paradise开放此端口。</p>
+<p>端口：43210、54321</p>
+<p>服务：[NULL]</p>
+<p>说明：木马SchoolBus 1.0/2.0开放此端口。</p>
+<p>端口：44445</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Happypig开放此端口。</p>
+<p>端口：50766</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Fore开放此端口。</p>
+<p>端口：53001</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Remote Windows Shutdown开放此端口。</p>
+<p>端口：65000</p>
+<p>服务：[NULL]</p>
+<p>说明：木马Devil 1.03开放此端口。</p>
+<p>端口：88</p>
+<p>说明：Kerberos krb5。另外TCP的88端口也是这个用途。</p>
+<p>端口：137</p>
+<p>说明：SQL Named Pipes encryption over other protocols name lookup(其他协议名称查找上的SQL命名管道加密技术)和SQL RPC encryption over other protocols name lookup(其他协议名称查找上的SQL RPC加密技术)和Wins NetBT name service(WINS NetBT名称服务)和Wins Proxy都用这个端口。</p>
+<p>端口：161</p>
+<p>说明：Simple Network Management Protocol(SMTP)（简单网络管理协议）。</p>
+<p>端口：162</p>
+<p>说明：SNMP Trap（SNMP陷阱）</p>
+<p>端口：445</p>
+<p>说明：Common Internet File System(CIFS)（公共Internet文件系统）</p>
+<p>端口：464</p>
+<p>说明：Kerberos kpasswd(v5)。另外TCP的464端口也是这个用途。</p>
+<p>端口：500</p>
+<p>说明：Internet Key Exchange(IKE)（Internet密钥交换）</p>
+<p>端口：1645、1812</p>
+<p>说明：Remot Authentication Dial-In User Service(RADIUS)authentication(Routing and Remote Access)(远程认证拨号用户服务)</p>
+<p>端口：1646、1813</p>
+<p>说明：RADIUS accounting(Routing and Remote Access)(RADIUS记帐（路由和远程访问）)</p>
+<p>端口：1701</p>
+<p>说明：Layer Two Tunneling Protocol(L2TP)(第2层隧道协议)</p>
+<p>端口：1801、3527</p>
+<p>说明：Microsoft Message Queue Server(Microsoft消息队列服务器)。还有TCP的135、1801、2101、2103、2105也是同样的用途。</p>
+<p>端口：2504</p>
+<p>说明：Network Load Balancing(网络平衡负荷)</p>
+<p>常见命令和端口列表</p>
+<p>网络基础知识!端口对照,常用命令! 常用端口对照表！</p>
+<p>端口：0 服务：Reserved 说明：通常用于分析操作系统。这一方法能够工作是因为在一些系统中“0”是无效端口，当你试图使用通常的闭合端口连接它时将产生不同的结果。一种典型的扫描，使用IP地址为0.0.0.0，设置ACK位并在以太网层广播。</p>
+<p>端口：1 服务：tcpmux 说明：这显示有人在寻找SGI Irix机器。Irix是实现tcpmux的主要提供者，默认情况下tcpmux在这种系统中被打开。Irix机器在发布是含有几个默认的无密码的帐户，如：IP、GUEST UUCP、NUUCP、DEMOS 、TUTOR、DIAG、OUTOFBOX等。许多管理员在安装后忘记删除这些帐户。因此HACKER在INTERNET上搜索tcpmux并利用这些帐户。</p>
+<p>端口：7 服务：Echo 说明：能看到许多人搜索Fraggle放大器时，发送到X.X.X.0和X.X.X.255的信息。</p>
+<p>端口：19 服务：Character Generator 说明：这是一种仅仅发送字符的服务。UDP版本将会在收到UDP包后回应含有垃圾字符的包。TCP连接时会发送含有垃圾字符的数据流直到连接关闭。HACKER利用IP欺骗可以发动DoS攻击。伪造两个chargen服务器之间的UDP包。同样Fraggle DoS攻击向目标地址的这个端口广播一个带有伪造受害者IP的数据包，受害者为了回应这些数据而过载。</p>
+<p>端口：21 服务：FTP 说明：FTP服务器所开放的端口，用于上传、下载。最常见的攻击者用于寻找打开anonymous的FTP服务器的方法。这些服务器带有可读写的目录。木马Doly Trojan、Fore、Invisible FTP、WebEx、WinCrash和Blade Runner所开放的端口。</p>
+<p>端口：22 服务：Ssh 说明：PcAnywhere建立的TCP和这一端口的连接可能是为了寻找ssh。这一服务有许多弱点，如果配置成特定的模式，许多使用RSAREF库的版本就会有不少的漏洞存在。</p>
+<p>端口：23 服务：Telnet 说明：远程登录，入侵者在搜索远程登录UNIX的服务。大多数情况下扫描这一端口是为了找到机器运行的操作系统。还有使用其他技术，入侵者也会找到密码。木马Tiny Telnet Server就开放这个端口。</p>
+<p>端口：25 服务：SMTP 说明：SMTP服务器所开放的端口，用于发送邮件。入侵者寻找SMTP服务器是为了传递他们的SPAM。入侵者的帐户被关闭，他们需要连接到高带宽的E-MAIL服务器上，将简单的信息传递到不同的地址。木马Antigen、Email Password Sender、Haebu Coceda、Shtrilitz Stealth、WinPC、WinSpy都开放这个端口。</p>
+<p>端口：31 服务：MSG Authentication 说明：木马Master Paradise、Hackers Paradise开放此端口。 端口：42 服务：WINS Replication 说明：WINS复制</p>
+<p>端口：53 服务：Domain Name Server（DNS） 说明：DNS服务器所开放的端口，入侵者可能是试图进行区域传递（TCP），欺骗DNS（UDP）或隐藏其他的通信。因此防火墙常常过滤或记录此端口。</p>
+<p>端口：67 服务：Bootstrap Protocol Server 说明：通过DSL和Cable modem的防火墙常会看见大量发送到广播地址255.255.255.255的数据。这些机器在向DHCP服务器请求一个地址。HACKER常进入它们，分配一个地址把自己作为局部路由器而发起大量中间人（man-in-middle）攻击。客户端向68端口广播请求配置，服务器向67端口广播回应请求。这种回应使用广播是因为客户端还不知道可以发送的IP地址。</p>
+<p>端口：69 服务：Trival File Transfer 说明：许多服务器与bootp一起提供这项服务，便于从系统下载启动代码。但是它们常常由于错误配置而使入侵者能从系统中窃取任何 文件。它们也可用于系统写入文件。</p>
+<p>端口：79 服务：Finger Server 说明：入侵者用于获得用户信息，查询操作系统，探测已知的缓冲区溢出错误，回应从自己机器到其他机器Finger扫描。</p>
+<p>端口：80 服务：HTTP 说明：用于网页浏览。木马Executor开放此端口。</p>
+<p>端口：99 服务：metagram Relay 说明：后门程序ncx99开放此端口。</p>
+<p>端口：102 服务：Message transfer agent(MTA)-X.400 over TCP/IP 说明：消息传输代理。</p>
+<p>端口：109 服务：Post Office Protocol -Version3 说明：POP3服务器开放此端口，用于接收邮件，客户端访问服务器端的邮件服务。POP3服务有许多公认的弱点。关于用户名和密码交 换缓冲区溢出的弱点至少有20个，这意味着入侵者可以在真正登陆前进入系统。成功登陆后还有其他缓冲区溢出错误。</p>
+<p>端口：110 服务：SUN公司的RPC服务所有端口 说明：常见RPC服务有rpc.mountd、NFS、rpc.statd、rpc.csmd、rpc.ttybd、amd等</p>
+<p>端口：113 服务：Authentication Service 说明：这是一个许多计算机上运行的协议，用于鉴别TCP连接的用户。使用标准的这种服务可以获得许多计算机的信息。但是它可作为许多服务的记录器，尤其是FTP、POP、IMAP、SMTP和IRC等服务。通常如果有许多客户通过防火墙访问这些服务，将会看到许多这个端口的连接请求。记住，如果阻断这个端口客户端会感觉到在防火墙另一边与E-MAIL服务器的缓慢连接。许多防火墙支持TCP连接的阻断过程中发回RST。这将会停止缓慢的连接。</p>
+<p>端口：119 服务：Network News Transfer Protocol 说明：NEWS新闻组传输协议，承载USENET通信。这个端口的连接通常是人们在寻找USENET服务器。多数ISP限制，只有他们的客户才能访问他们的新闻组服务器。打开新闻组服务器将允许发/读任何人的帖子，访问被限制的新闻组服务器，匿名发帖或发送SPAM。</p>
+<p>端口：135 服务：Location Service 说明：Microsoft在这个端口运行DCE RPC end-point mapper为它的DCOM服务。这与UNIX 111端口的功能很相似。使用DCOM和RPC的服务利用计算机上的end-point mapper注册它们的位置。远端客户连接到计算机时，它们查找end-point mapper找到服务的位置。HACKER扫描计算机的这个端口是为了找到这个计算机上运行Exchange Server吗？什么版本？还有些DOS攻击直接针对这个端口。</p>
+<p>端口：137、138、139 服务：NETBIOS Name Service 说明：其中137、138是UDP端口，当通过网上邻居传输文件时用这个端口。而139端口：通过这个端口进入的连接试图获得NetBIOS/SMB服务。这个协议被用于windows文件和打印机共享和SAMBA。还有WINS Regisrtation也用它。</p>
+<p>端口：143 服务：Interim Mail Access Protocol v2 说明：和POP3的安全问题一样，许多IMAP服务器存在有缓冲区溢出漏洞。记住：一种LINUX蠕虫（admv0rm）会通过这个端口繁殖，因此许多这个端口的扫描来自不知情的已经被感染的用户。当REDHAT在他们的LINUX发布版本中默认允许IMAP后，这些漏洞变的很流行。这一端口还被用于IMAP2，但并不流行。</p>
+<p>端口：161 服务：SNMP 说明：SNMP允许远程管理设备。所有配置和运行信息的储存在数据库中，通过SNMP可获得这些信息。许多管理员的错误配置将被暴露在Internet。Cackers将试图使用默认的密码public、private访问系统。他们可能会试验所有可能的组合。SNMP包可能会被错误的指向用户的网络。</p>
+<p>端口：177 服务：X Display Manager Control Protocol 说明：许多入侵者通过它访问X-windows操作台，它同时需要打开6000端口。</p>
+<p>端口：389 服务：LDAP、ILS 说明：轻型目录访问协议和NetMeeting Internet Locator Server共用这一端口。</p>
+<p>端口：443 服务：Https 说明：网页浏览端口，能提供加密和通过安全端口传输的另一种HTTP。</p>
+<p>端口：456 服务：[NULL] 说明：木马HACKERS PARADISE开放此端口。</p>
+<p>端口：513 服务：Login,remote login 说明：是从使用cable modem或DSL登陆到子网中的UNIX计算机发出的广播。这些人为入侵者进入他们的系统提供了信息。 端口：544 服务：[NULL] 说明：kerberos kshell</p>
+<p>端口：548 服务：Macintosh,File Services(AFP/IP) 说明：Macintosh,文件服务。</p>
+<p>端口：553 服务：CORBA IIOP （UDP） 说明：使用cable modem、DSL或VLAN将会看到这个端口的广播。CORBA是一种面向对象的RPC系统。入侵者可以利用这些信息进入系统。 端口：555 服务：DSF 说明：木马PhAse1.0、Stealth Spy、IniKiller开放此端口。</p>
+<p>端口：568 服务：Membership DPA 说明：成员资格 DPA。</p>
+<p>端口：569 服务：Membership MSN 说明：成员资格 MSN。</p>
+<p>端口：635 服务：mountd 说明：Linux的mountd Bug。这是扫描的一个流行BUG。大多数对这个端口的扫描是基于UDP的，但是基于TCP的mountd有所增加（mountd同时运行于两个端口）。记住mountd可运行于任何端口（到底是哪个端口，需要在端口111做portmap查询），只是Linux默认端口是635，就像NFS通常运行于2049端口。</p>
+<p>端口：636 服务：LDAP 说明：SSL（Secure Sockets layer）</p>
+<p>端口：666 服务：Doom Id Software 说明：木马Attack FTP、Satanz Backdoor开放此端口</p>
+<p>端口：993 服务：IMAP 说明：SSL（Secure Sockets layer） 端口：1001、1011 服务：[NULL] 说明：木马Silencer、WebEx开放1001端口。木马Doly Trojan开放1011端口。</p>
+<p>端口：1024 服务：Reserved 说明：它是动态端口的开始，许多程序并不在乎用哪个端口连接网络，它们请求系统为它们分配下一个闲置端口。基于这一点分配从端口1024开始。这就是说第一个向系统发出请求的会分配到1024端口。你可以重启机器，打开Telnet，再打开一个窗口运行natstat -a 将会看到Telnet被分配1024端口。还有SQL session也用此端口和5000端口。</p>
+<p>端口：1025、1033 服务：1025：network blackjack 1033：[NULL] 说明：木马netspy开放这2个端口。</p>
+<p>端口：1080 服务：SOCKS 说明：这一协议以通道方式穿过防火墙，允许防火墙后面的人通过一个IP地址访问INTERNET。理论上它应该只允许内部的通信向外到达INTERNET。但是由于错误的配置，它会允许位于防火墙外部的攻击穿过防火墙。WinGate常会发生这种错误，在加入IRC聊天室时常会看到这种情况。</p>
+<p>端口：1170 服务：[NULL] 说明：木马Streaming Audio Trojan、Psyber Stream Server、Voice开放此端口。</p>
+<p>端口：1234、1243、6711、6776 服务：[NULL] 说明：木马SubSeven2.0、Ultors Trojan开放1234、6776端口。木马SubSeven1.0/1.9开放1243、6711、6776端口。</p>
+<p>端口：1245 服务：[NULL] 说明：木马Vodoo开放此端口。</p>
+<p>端口：1433 服务：SQL 说明：Microsoft的SQL服务开放的端口。</p>
+<p>端口：1492 服务：stone-design-1 说明：木马FTP99CMP开放此端口。</p>
+<p>端口：1500 服务：RPC client fixed port session queries 说明：RPC客户固定端口会话查询</p>
+<p>端口：1503 服务：NetMeeting T.120 说明：NetMeeting T.120</p>
+<p>端口：1524 服务：ingress 说明：许多攻击脚本将安装一个后门SHELL于这个端口，尤其是针对SUN系统中Sendmail和RPC服务漏洞的脚本。如果刚安装了防火墙就看到在这个端口上的连接企图，很可能是上述原因。可以试试Telnet到用户的计算机上的这个端口，看看它是否会给你一个SHELL。连接到600/pcserver也存在这个问题。</p>
+<p>端口：1600 服务：issd 说明：木马Shivka-Burka开放此端口。</p>
+<p>端口：1720 服务：NetMeeting 说明：NetMeeting H.233 call Setup。</p>
+<p>端口：1731 服务：NetMeeting Audio Call Control 说明：NetMeeting音频调用控制。</p>
+</div><ul class="post-copyright"><li><strong>Post Title: </strong><a href="https://github.com/gengyuchao/gengyuchao.github.io/2020/08/27/编程/端口号范围/">端口号范围（转）</a></li><li><strong>Post Author: </strong><a href="https://github.com/gengyuchao/gengyuchao.github.io">Geng Yuchao</a></li><li><strong>Post Link: </strong><a href="https://github.com/gengyuchao/gengyuchao.github.io/2020/08/27/编程/端口号范围/">https://github.com/gengyuchao/gengyuchao.github.io/2020/08/27/编程/端口号范围/</a></li><li><strong>Copyright Notice: </strong><span>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.</span></li></ul><div><div class="recommend-post"><span class="is-size-6 has-text-grey has-mr-7"># Related Post</span><br><span>  1.<a class="is-size-6" href="/2020/08/09/%E7%BC%96%E7%A8%8B/setjump_and_longjump%E7%9A%84%E7%94%A8%E6%B3%95/" target="_blank">setjump_and_longjump</a><br></span></div></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/css/share.min.css"><div class="social-share"></div><script src="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button is-info donate"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="https://raw.githubusercontent.com/removeif/blog_image/master/img/2019/20190802135456.png" alt="Alipay"></span></a><a class="button is-success donate"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="https://raw.githubusercontent.com/removeif/blog_image/master/img/2019/20190802135550.png" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2020/09/04/%E7%BC%96%E7%A8%8B/Qt_Tcp_%E6%96%87%E4%BB%B6%E5%8F%91%E9%80%81%E9%A1%B9%E7%9B%AE/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Qt_Tcp_文件发送项目.md</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/08/13/%E4%B8%AA%E4%BA%BA%E6%96%87%E6%A1%A3/%E4%B8%AA%E4%BA%BA%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/"><span class="level-item">个人学习计划</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><div class="title is-5">Comments</div><div id="comment-container"></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/gitalk/1.6.0/gitalk.css"><script> $.getScript('https://cdn.jsdelivr.net/gh/gengyuchao/gengyuchao.github.io@master/js/gitalk.min.js', function () { 
+            var gitalk = new Gitalk({
+            language:'zh-CN',
+            id: '741e5059137615ae157e0980bc3581e1',
+            repo: 'gengyuchao.github.io',
+            owner: 'gengyuchao',
+            clientID: 'e2be3865225154dcbde7',
+            clientSecret: 'fa6d41df234107bc28f5a6eadbd4f9e3f18eb4d7',
+            admin: ["gengyuchao"],
+            createIssueManually: true,
+            distractionFreeMode: false,
+            perPage: 10,
+            pagerDirection: 'last',
+            
+            
+            enableHotKey: true,
+            isLocked: false
+        })
+        gitalk.render('comment-container')});</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1 is-sticky"><div class="card widget toc-scroll" id="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list toc"><li><a class="is-flex toc-item" id="toc-item-端口号范围-和-入侵电脑端口查询" href="#端口号范围-和-入侵电脑端口查询"><span>端口号范围 和 入侵电脑端口查询</span></a><ul class="menu-list toc"><li><a class="is-flex toc-item" id="toc-item-端口概念" href="#端口概念"><span>端口概念</span></a><ul class="menu-list toc"><li><a class="is-flex toc-item" id="toc-item-（1）知名端口（Well-Known-Ports）" href="#（1）知名端口（Well-Known-Ports）"><span>（1）知名端口（Well-Known Ports）</span></a></li><li><a class="is-flex toc-item" id="toc-item-（2）动态端口（Dynamic-Ports）" href="#（2）动态端口（Dynamic-Ports）"><span>（2）动态端口（Dynamic Ports）</span></a></li></ul></li><li><a class="is-flex toc-item" id="toc-item-入侵电脑端口查询" href="#入侵电脑端口查询"><span>入侵电脑端口查询</span></a></li></ul></li></ul></div></div><script type="text/javascript" async>
+        $(document).ready(function () { //参考自 https://github.com/ppoffice/hexo-theme-icarus/pull/616/files
+            var observerTopMargin;
+            var scrollObserver;
+            var headerElems = $(".headerlink");
+            var activeTocItem;
+        
+            function initIntersectionObserver(docHeight) {
+                observerTopMargin = docHeight;
+                scrollObserver = new IntersectionObserver(scrollCallBack,
+                    {
+                        root: null,  // viewpoint
+                        rootMargin: docHeight + "px 0px -80% 0px"  // cover top 30% of viewport to the top of document
+                    })
+            }
+        
+            function scrollCallBack(entries, observer) {
+                if ($(window).scrollTop() > observerTopMargin * 0.7) { 
+                    // User somehow scroll to 70% of observerTopMargin (which is inited as 200% document height)
+                    // Observer top margin need to extend to cover all the space to the top of the document
+                    initIntersectionObserver(observerTopMargin * 2)
+                    observer.disconnect();
+                    return;
+                }
+                let toActive;
+                if (entries[0].intersectionRatio == 1) {  // enter viewed area
+                    let entry = entries.reduce((u, v) => (u.target.toc_id > v.target.toc_id ? u : v));  // get the lowest item
+                    toActive = $("#toc-item-" + $(entry.target).attr("href").substr(1));
+                } else {
+                    let entry = entries.reduce((u, v) => (u.target.toc_id < v.target.toc_id ? u : v));  // get the highest item
+                    let idx = Math.max(entry.target.toc_id - 1, 0);
+                    toActive = $("#toc-item-" + $(headerElems[idx]).attr("href").substr(1));
+                }
+                if (activeTocItem) activeTocItem.removeClass("is-current");
+                activeTocItem = toActive
+                activeTocItem.addClass("is-current");
+            }
+        
+            initIntersectionObserver($(document).height() * 2);
+            headerElems.each(function (index, obj) {
+                obj.toc_id = index;
+                scrollObserver.observe(obj);
+            })
+        });</script></div><div class="card widget"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="is-rounded" src="/img/avatar.png" alt="神迹の降临"></figure><p class="title is-size-4 is-block line-height-inherit">神迹の降临</p><p class="is-size-6 is-block">尚未执佩剑，转眼即江湖</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>阿尔及利亚</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">35</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">8</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">22</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/gengyuchao" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-white is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/gengyuchao"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-white is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://github.com/gengyuchao"><i class="fab fa-weibo"></i></a><a class="level-item button is-transparent is-white is-marginless" target="_blank" rel="noopener" title="Email" href="mailto:gengyuchao11@163.com"><i class="fa fa-envelope"></i></a><a class="level-item button is-transparent is-white is-marginless" target="_blank" rel="noopener" title="Next" href="https://removeif.github.io/remove.io"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-white is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div><div><hr><p id="hitokoto">:D 一言句子获取中...</p><script type="text/javascript" defer>function getYiyan(){
+                                $.getJSON("https://v1.hitokoto.cn/", function (data) {
+                                if(data){
+                                    $('#hitokoto').html("");
+                                    $('#hitokoto').append("<strong style='color: #3273dc;'>"+data.hitokoto+"</strong>"+
+                                    "<p>"+"From《"+data.from+"》</p><p>Provider-"+data.creator+"</p>");
+                                }});}
+                                $(function (){getYiyan();$('#hitokoto').click(function(){getYiyan();})});</script></div></div></div><div class="card widget"><div class="card-content"><h3 class="menu-label">Latest Comment</h3><span class="body_hot_comment">Loading...Wait a Minute!</span></div></div><div class="card widget"><div class="card-content"><h3 class="menu-label">Recent</h3><article class="media"><div class="media-content size-small"><p><time dateTime="2020-12-10T11:46:44.072Z">2020-12-10</time></p><p class="title is-6"><a class="link-muted" href="/2020/12/10/Ubuntu%E7%B3%BB%E7%BB%9F/%E6%98%BE%E7%A4%BA%E5%99%A8%E8%BD%AF%E4%BB%B6%E6%8E%A7%E5%88%B6/">Ubuntu常用软件</a></p><p class="is-uppercase"><i class="fas fa-folder-open has-text-grey"> </i><a class="link-muted" href="/categories/Ubuntu%E7%B3%BB%E7%BB%9F/">Ubuntu系统</a></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-12-07T14:19:30.000Z">2020-12-07</time></p><p class="title is-6"><a class="link-muted" href="/2020/12/07/ESP32%E5%AD%A6%E4%B9%A0/%E4%BD%BF%E7%94%A8%20ESP32%20%E4%BD%9C%E4%B8%BA%E8%93%9D%E7%89%99%20adapter%20(%E9%80%82%E9%85%8D%E5%99%A8)/">使用 ESP32 作为蓝牙 adapter （适配器）</a></p><p class="is-uppercase"><i class="fas fa-folder-open has-text-grey"> </i><a class="link-muted" href="/categories/ESP8266%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">ESP8266开发学习笔记</a></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-09-22T07:35:22.991Z">2020-09-22</time></p><p class="title is-6"><a class="link-muted" href="/2020/09/22/Ubuntu%E7%B3%BB%E7%BB%9F/Chrome%E8%B6%85%E9%93%BE%E6%8E%A5%E5%8F%98%E8%89%B2%E9%97%AE%E9%A2%98/">Chrome 浏览器超链接变色问题</a></p><p class="is-uppercase"><i class="fas fa-folder-open has-text-grey"> </i><a class="link-muted" href="/categories/Ubuntu%E7%B3%BB%E7%BB%9F/">Ubuntu系统</a></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-08-27T06:52:35.573Z">2020-08-27</time></p><p class="title is-6"><a class="link-muted" href="/2020/08/27/%E7%BC%96%E7%A8%8B/%E7%AB%AF%E5%8F%A3%E5%8F%B7%E8%8C%83%E5%9B%B4/">端口号范围（转）</a></p><p class="is-uppercase"><i class="fas fa-folder-open has-text-grey"> </i><a class="link-muted" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-08-11T11:24:56.259Z">2020-08-11</time></p><p class="title is-6"><a class="link-muted" href="/2020/08/11/Ubuntu%E7%B3%BB%E7%BB%9F/Ubuntu%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6/">Ubuntu常用软件</a></p><p class="is-uppercase"><i class="fas fa-folder-open has-text-grey"> </i><a class="link-muted" href="/categories/Ubuntu%E7%B3%BB%E7%BB%9F/">Ubuntu系统</a></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/categories/Bluetooth%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><span class="level-start"><span class="level-item">Bluetooth学习笔记</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/ESP32/"><span class="level-start"><span class="level-item">ESP32</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/ESP8266%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><span class="level-start"><span class="level-item">ESP8266开发学习笔记</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/Ubuntu/"><span class="level-start"><span class="level-item">Ubuntu</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/Ubuntu%E7%B3%BB%E7%BB%9F/"><span class="level-start"><span class="level-item">Ubuntu系统</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E6%97%A5%E5%B8%B8/"><span class="level-start"><span class="level-item">日常</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">编程</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/archives/2020/12/"><span class="level-start"><span class="level-item">December 2020</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/09/"><span class="level-start"><span class="level-item">September 2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/08/"><span class="level-start"><span class="level-item">August 2020</span></span><span class="level-end"><span class="level-item tag">30</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/IDF/"><span class="tag">IDF</span><span class="tag is-grey-lightest">18</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><span class="tag">学习笔记</span><span class="tag is-grey-lightest">18</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ESP32/"><span class="tag">ESP32</span><span class="tag is-grey-lightest">12</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Bluetooth/"><span class="tag">Bluetooth</span><span class="tag is-grey-lightest">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ESP8266/"><span class="tag">ESP8266</span><span class="tag is-grey-lightest">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Ubuntu/"><span class="tag">Ubuntu</span><span class="tag is-grey-lightest">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/"><span class="tag">系统安装</span><span class="tag is-grey-lightest">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BC%96%E7%A8%8B/"><span class="tag">编程</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/TCP/"><span class="tag">TCP</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/TEST/"><span class="tag">TEST</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/English/"><span class="tag">English</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C%E8%AF%AD%E8%A8%80/"><span class="tag">C语言</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Windows/"><span class="tag">Windows</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%93%9D%E7%89%99/"><span class="tag">蓝牙</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/"><span class="tag">学习资料</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%90%9C%E7%8B%97%E8%BE%93%E5%85%A5%E6%B3%95/"><span class="tag">搜狗输入法</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%97%A5%E5%B8%B8/"><span class="tag">日常</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B5%AE%E7%82%B9%E6%95%B0%E6%89%93%E5%8D%B0/"><span class="tag">浮点数打印</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/OLED/"><span class="tag">OLED</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag is-grey-lightest">1</span></a></div></div><div class="field is-grouped is-grouped-multiline"><a class="tags has-addons" href="/tags/"><span class="tag">查看全部&gt;&gt;</span></a></div></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Subscribe to Updates</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=removeifFeedsId&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="removeifFeedsId" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button is-primary" type="submit" value="Subscribe"></div></div><p class="help">输入邮箱开始订阅，更博后邮件通知！</p></form></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="https://cdn.jsdelivr.net/gh/gengyuchao/gengyuchao.github.io@master/img/logo.png" alt="神迹の降临" height="28"></a><p class="size-small"><span>&copy; 2020 Geng Yuchao</span>  Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a> &amp; <a href="https://github.com/removeif/hexo-theme-amazing" target="_blank">Amazing</a> <br><span>© 版权说明：[本网站所有内容均收集于互联网或自己创作,<br />&nbsp;&nbsp;&nbsp;&nbsp;方便于网友与自己学习交流，如有侵权，请<a href="/message" target="_blank">留言</a>，立即处理]<br /></span><span><span id="statistic-times">loading...</span><script>function createTime(time) {
+            var n = new Date(time);
+            now.setTime(now.getTime() + 250),
+                days = (now - n) / 1e3 / 60 / 60 / 24,
+                dnum = Math.floor(days),
+                hours = (now - n) / 1e3 / 60 / 60 - 24 * dnum,
+                hnum = Math.floor(hours),
+            1 == String(hnum).length && (hnum = "0" + hnum),
+                minutes = (now - n) / 1e3 / 60 - 1440 * dnum - 60 * hnum,
+                mnum = Math.floor(minutes),
+            1 == String(mnum).length && (mnum = "0" + mnum),
+                seconds = (now - n) / 1e3 - 86400 * dnum - 3600 * hnum - 60 * mnum,
+                snum = Math.round(seconds),
+            1 == String(snum).length && (snum = "0" + snum),
+                document.getElementById("statistic-times").innerHTML = "❤️Site from <strong>"+time.split(" ")[0].replace(/\//g,".")+"</strong> has existed <strong>" + dnum + "</strong> d <strong>" + hnum + "</strong> h <strong>" + mnum + "</strong> m <strong>" + snum + "</strong> s！❤️";
+        }var now = new Date();setInterval("createTime('2020/8/9 00:00:00')", 250,"");</script><br></span><div class="size-small"><span>❤️Thx <strong><span id="busuanzi_value_site_uv">99+</span></strong> users <strong><span id="busuanzi_value_site_pv">99+</span></strong> visited！❤️</span></div></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/gengyuchao"><i class="fab fa-github"></i></a></p></div><div class="sideMusic"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/gh/gengyuchao/gengyuchao.github.io@master/js/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script><meting-js style="width: auto;height: 2000px;" server="netease" type="playlist" id="3226150252" theme="#2980b9" loop="all" autoplay="false" order="list" storageName="aplayer-setting" lrctype="0" list-max-height="400px" fixed="true"></meting-js></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            site: {
+                url: 'https://github.com/gengyuchao/gengyuchao.github.io',
+                external_link: {"enable":true,"exclude":[]}
+            },
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" defer></script><script src="https://cdn.jsdelivr.net/gh/gengyuchao/gengyuchao.github.io@master/js/animation.min.js"></script><a id="back-to-top" title="Back to Top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="https://cdn.jsdelivr.net/gh/gengyuchao/gengyuchao.github.io@master/js/back-to-top.min.js" defer></script><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.12/js/lightgallery-all.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/gh/gengyuchao/gengyuchao.github.io@master/js/toc.min.js" defer></script><script src="https://cdn.jsdelivr.net/gh/gengyuchao/gengyuchao.github.io@master/js/main.min.js" defer></script><script>$.getScript('https://cdn.jsdelivr.net/gh/gengyuchao/gengyuchao.github.io@master/js/comment-issue-data.min.js',function(){loadIssueData('e2be3865225154dcbde7','fa6d41df234107bc28f5a6eadbd4f9e3f18eb4d7','gengyuchao','gengyuchao.github.io',false);})</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/gengyuchao/gengyuchao.github.io@master/css/insight.min.css"><div class="searchbox ins-search"><div class="searchbox-container ins-search-container"><div class="searchbox-input-wrapper"><input class="searchbox-input ins-search-input" type="text" placeholder="Type something..."><span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span></div><div class="searchbox-result-wrapper ins-section-wrapper"><div class="ins-section-container"></div></div></div></div><script>(function (window) {
+            var INSIGHT_CONFIG = {
+                TRANSLATION: {
+                    POSTS: 'Posts',
+                    PAGES: 'Pages',
+                    CATEGORIES: 'Categories',
+                    TAGS: 'Tags',
+                    UNTITLED: '(Untitled)',
+                },
+                CONTENT_URL: 'https://cdn.jsdelivr.net/gh/gengyuchao/gengyuchao.github.io@master/content.json',
+            };
+            window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+        })(window);</script><script src="https://cdn.jsdelivr.net/gh/gengyuchao/gengyuchao.github.io@master/js/insight.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script><script type="text/javascript">var pjax = new Pjax({
+            elements: "a",//代表点击链接就更新
+            selectors: [  //代表要更新的节点
+                ".section",
+                "title"
+            ],
+            cache: true,
+            cacheBust:false
+        })
+
+        function loadBusuanzi(){
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js", function () {});
+        }
+
+        // 开始 PJAX 执行的函数
+        document.addEventListener('pjax:send', function () {
+        });
+        
+        // PJAX 完成之后执行的函数，可以和上面的重载放在一起
+        document.addEventListener('pjax:complete', function () {
+            $(".section").css({opacity:1});
+            if(true){
+                $.getScript('https://cdn.jsdelivr.net/gh/gengyuchao/gengyuchao.github.io@master/js/comment-issue-data.min.js',function(){loadIssueData('e2be3865225154dcbde7','fa6d41df234107bc28f5a6eadbd4f9e3f18eb4d7','gengyuchao','gengyuchao.github.io',false);});
+            }
+            if(false){
+                loadMathJax();
+            }
+            loadMainJs(jQuery, window.moment, window.ClipboardJS, window.IcarusThemeSettings);
+            loadBackTop();
+            loadBusuanzi();
+            if(typeof loadBanner == 'function'){
+                loadBanner();
+            }
+        });</script></body></html>
